@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SportsStore.Domain.Entities.Customer>
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer</h2>
+<table class="table table-responsive table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Last name</td>
+        <td>Address</td>
+    </tr>
+    @foreach (var cust in Model)
+    {
+        <tr>
+            <td>@cust.CustomerId</td>
+            <td>@cust.FirstName</td>
+            <td>@cust.LastName</td>
+            <td>@cust.Address</td>
+        </tr>
+    }
+</table>
+
+

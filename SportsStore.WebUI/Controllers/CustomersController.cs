@@ -15,7 +15,11 @@ namespace SportsStore.WebUI.Controllers
     public class CustomersController : Controller
     {
         private EFDbContext db = new EFDbContext();
-        private IProductRepository repository = new EFProductRepository();
+        private IProductRepository repository; //= new EFProductRepository();
+        public CustomersController (IProductRepository repo)
+        {
+            repository = repo;
+        }
         // GET: Customers
         public ActionResult Index(string sortOrder, string searchString)
         {
@@ -49,7 +53,8 @@ namespace SportsStore.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = repository.Customers.FirstOrDefault(c => c.CustomerId == id);
+            //Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -74,8 +79,9 @@ namespace SportsStore.WebUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Customers.Add(customer);
-                    db.SaveChanges();
+                    repository.Add(customer);
+                    //db.Customers.Add(customer);
+                    //db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }

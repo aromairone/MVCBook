@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Http;
 
 namespace SportsStore.WebUI
 {
@@ -11,6 +12,11 @@ namespace SportsStore.WebUI
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapHttpRoute(
+            name: "API Default",
+            routeTemplate: "api/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+            );
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             //Configure route for List of products paging
             routes.MapRoute(null,

@@ -9,5 +9,9 @@ namespace SportsStore.Domain.Abstract
     {
         IQueryable<Product> Products { get; }
         IQueryable<Customer> Customers { get; }
+        void Add(Customer cust);
+        void Remove(Customer cust);
+        void Edit(Customer cust);
+
     }
 }
